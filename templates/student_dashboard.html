@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard | Smart Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <h2>🎓 Smart Placement</h2>
+
+        <div>
+
+            <a href="/student/dashboard">
+            Dashboard
+        </a>
+
+            <a href="/student/profile">
+            Profile
+        </a>
+
+            <a href="/logout">
+            Logout
+        </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="card" style="text-align:center; margin-bottom:30px;">
+
+            <div class="float" style="font-size:55px;">
+                🎓
+            </div>
+
+            <h1>
+                Student Dashboard
+            </h1>
+
+            <p>
+                Welcome to your Smart Placement Portal
+            </p>
+
+            <p>
+                Explore opportunities, apply for jobs and track your placement journey.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= DASHBOARD CARDS ================= -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- PROFILE -->
+
+            <div class="dashboard-card">
+
+                <div style="font-size:42px;">
+                    👤
+                </div>
+
+                <h3>
+                    My Profile
+                </h3>
+
+                <p>
+                    View your personal information, course, CGPA and skills.
+                </p>
+
+                <a href="/student/profile">
+
+                    <button>
+                    View Profile
+                </button>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- AVAILABLE JOBS -->
+
+            <div class="dashboard-card">
+
+                <div style="font-size:42px;">
+                    💼
+                </div>
+
+                <h3>
+                    Available Jobs
+                </h3>
+
+                <p>
+                    Explore available placement opportunities from companies.
+                </p>
+
+                <a href="/student/jobs">
+
+                    <button>
+                    Explore Jobs
+                </button>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- RECOMMENDED JOBS -->
+
+            <div class="dashboard-card">
+
+                <div style="font-size:42px;">
+                    ⭐
+                </div>
+
+                <h3>
+                    Recommended Jobs
+                </h3>
+
+                <p>
+                    Find jobs recommended according to your course, CGPA and skills.
+                </p>
+
+                <a href="/student/recommended-jobs">
+
+                    <button>
+                    View Recommendations
+                </button>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- MY APPLICATIONS -->
+
+            <div class="dashboard-card">
+
+                <div style="font-size:42px;">
+                    📋
+                </div>
+
+                <h3>
+                    My Applications
+                </h3>
+
+                <p>
+                    Check the jobs you have applied for and their current status.
+                </p>
+
+                <a href="/student/applications">
+
+                    <button>
+                    View Applications
+                </button>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- PLACEMENT STATUS -->
+
+            <div class="dashboard-card">
+
+                <div style="font-size:42px;">
+                    📊
+                </div>
+
+                <h3>
+                    Placement Status
+                </h3>
+
+                <p>
+                    Track your application progress from Applied to Selected.
+                </p>
+
+                <a href="/student/placement-status">
+
+                    <button>
+                    Track Status
+                </button>
+
+                </a>
+
+            </div>
+
+
+
+            <!-- RESUME -->
+
+            <div class="dashboard-card">
+
+                <div style="font-size:42px;">
+                    📄
+                </div>
+
+                <h3>
+                    Resume
+                </h3>
+
+                <p>
+                    Upload and manage your resume from your student profile.
+                </p>
+
+                <a href="/student/profile">
+
+                    <button>
+                    Manage Resume
+                </button>
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= PLACEMENT JOURNEY ================= -->
+
+        <div class="card" style="margin-top:35px; text-align:center;">
+
+            <h2>
+                🚀 Your Placement Journey
+            </h2>
+
+            <div class="dashboard-grid">
+
+
+                <div>
+
+                    <div style="font-size:40px;">
+                        📝
+                    </div>
+
+                    <h3>
+                        Apply
+                    </h3>
+
+                    <p>
+                        Apply for suitable jobs.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <div style="font-size:40px;">
+                        ⭐
+                    </div>
+
+                    <h3>
+                        Shortlisted
+                    </h3>
+
+                    <p>
+                        Company reviews your application.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <div style="font-size:40px;">
+                        🎤
+                    </div>
+
+                    <h3>
+                        Interview
+                    </h3>
+
+                    <p>
+                        Attend the company interview.
+                    </p>
+
+                </div>
+
+
+                <div>
+
+                    <div style="font-size:40px;">
+                        🎉
+                    </div>
+
+                    <h3>
+                        Selected
+                    </h3>
+
+                    <p>
+                        Start your career journey.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+        <p>
+            Manage Your Career. Find Your Opportunity.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

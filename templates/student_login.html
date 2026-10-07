@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Login | Smart Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <h2>🎓 Smart Placement</h2>
+
+        <div>
+
+            <a href="/">Home</a>
+
+            <a href="/company/login">Company</a>
+
+            <a href="/admin/login">Admin</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ================= LOGIN ================= -->
+
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+
+            <div style="text-align:center; font-size:50px;">
+                🎓
+            </div>
+
+
+            <h1>
+                Student Login
+            </h1>
+
+
+            <p style="text-align:center; margin-bottom:25px;">
+                Login to explore placement opportunities
+            </p>
+
+
+            <form method="POST" action="/student/login">
+
+
+                <label>
+                Email Address
+            </label>
+
+                <input type="email" name="email" placeholder="Enter your email" required>
+
+
+                <label>
+                Password
+            </label>
+
+                <input type="password" name="password" placeholder="Enter your password" required>
+
+
+                <br><br>
+
+
+                <button type="submit" style="width:100%;">
+
+                🔐 Login
+
+            </button>
+
+
+            </form>
+
+
+            <p style="text-align:center; margin-top:25px;">
+
+                Don't have an account?
+
+                <a href="/student/register">
+                    <b>Register Now</b>
+                </a>
+
+            </p>
+
+
+            <p style="text-align:center; margin-top:15px;">
+
+                <a href="/">
+                ← Back to Home
+            </a>
+
+            </p>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

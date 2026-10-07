@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Applications | Smart Student Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .applications-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .applications-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .applications-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .applications-header p {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .application-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .application-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+            transition: 0.3s;
+            border: 1px solid #eee;
+        }
+        
+        .application-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .application-card h2 {
+            margin-bottom: 18px;
+            color: #222;
+        }
+        
+        .application-info {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .application-info strong {
+            color: #222;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .status-applied {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .status-shortlisted {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-interview {
+            background: #e8eaf6;
+            color: #3949ab;
+        }
+        
+        .status-selected {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .application-actions {
+            margin-top: 22px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .view-job-btn {
+            text-decoration: none;
+        }
+        
+        .view-job-btn button {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .cancel-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 11px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .cancel-btn:hover {
+            background: #b02a37;
+        }
+        
+        .empty-box {
+            background: white;
+            text-align: center;
+            padding: 50px 20px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+        
+        .empty-box h2 {
+            margin-bottom: 12px;
+        }
+        
+        .empty-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .jobs-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .navbar {
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .applications-header h1 {
+                font-size: 28px;
+            }
+            .application-grid {
+                grid-template-columns: 1fr;
+            }
+            .application-actions {
+                flex-direction: column;
+            }
+            .application-actions button,
+            .application-actions a {
+                width: 100%;
+            }
+            .view-job-btn button,
+            .cancel-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="nav-brand">
+                🎓 Smart Student Placement
+            </div>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('student_dashboard') }}">
+                Dashboard
+            </a>
+
+                <a href="{{ url_for('student_profile') }}">
+                Profile
+            </a>
+
+                <a href="/student/jobs">
+                Jobs
+            </a>
+
+                <a href="/student/recommended-jobs">
+                Recommended
+            </a>
+
+                <a href="/student/applications">
+                Applications
+            </a>
+
+                <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="applications-container">
+
+        <div class="applications-header">
+
+            <h1>📋 My Applications</h1>
+
+            <p>
+                View and manage all the jobs you have applied for.
+            </p>
+
+        </div>
+
+
+        <!-- ================= APPLICATION LIST ================= -->
+
+        {% if applications %}
+
+        <div class="application-grid">
+
+            {% for application in applications %}
+
+            <div class="application-card">
+
+                <h2>
+                    💼 {{ application[1] }}
+                </h2>
+
+
+                <div class="application-info">
+                    <strong>🏢 Company:</strong> {{ application[2] }}
+                </div>
+
+
+                <div class="application-info">
+                    <strong>📍 Location:</strong> {{ application[3] }}
+                </div>
+
+
+                <div class="application-info">
+                    <strong>💼 Job Type:</strong> {{ application[4] }}
+                </div>
+
+
+                <div class="application-info">
+                    <strong>📅 Applied On:</strong> {{ application[5] }}
+                </div>
+
+
+                <div class="application-info">
+
+                    <strong>📌 Status:</strong> {% if application[6] == "Applied" %}
+
+                    <span class="status status-applied">
+                                Applied
+                            </span> {% elif application[6] == "Shortlisted" %}
+
+                    <span class="status status-shortlisted">
+                                Shortlisted
+                            </span> {% elif application[6] == "Interview" %}
+
+                    <span class="status status-interview">
+                                Interview
+                            </span> {% elif application[6] == "Selected" %}
+
+                    <span class="status status-selected">
+                                Selected 🎉
+                            </span> {% elif application[6] == "Rejected" %}
+
+                    <span class="status status-rejected">
+                                Rejected
+                            </span> {% else %}
+
+                    <span class="status status-applied">
+                                {{ application[6] }}
+                            </span> {% endif %}
+
+                </div>
+
+
+                <!-- ================= ACTIONS ================= -->
+
+                <div class="application-actions">
+
+                    <!-- View Job -->
+
+                    <a class="view-job-btn" href="/student/job/{{ application[0] }}">
+
+                        <button type="button">
+                                👁️ View Job
+                            </button>
+
+                    </a>
+
+
+                    <!-- Cancel Application -->
+
+                    {% if application[6] == "Applied" %}
+
+                    <form method="POST" action="/student/cancel-application/{{ application[7] }}" onsubmit="return confirm('Are you sure you want to cancel this application?');">
+
+                        <button type="submit" class="cancel-btn">
+                                    ❌ Cancel Application
+                                </button>
+
+                    </form>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        <!-- ================= NO APPLICATIONS ================= -->
+
+        {% else %}
+
+        <div class="empty-box">
+
+            <h2>
+                📭 No Applications Yet
+            </h2>
+
+            <p>
+                You have not applied for any job yet. Explore available jobs and apply for suitable opportunities.
+            </p>
+
+            <a href="/student/jobs" class="jobs-btn">
+                🔍 Explore Jobs
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

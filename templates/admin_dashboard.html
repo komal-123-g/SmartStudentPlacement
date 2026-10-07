@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Smart Student Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .welcome-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .welcome-box h1 {
+            margin-bottom: 10px;
+            font-size: 34px;
+        }
+        
+        .welcome-box p {
+            margin: 0;
+            opacity: 0.95;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+        
+        .dashboard-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+        
+        .dashboard-card h2 {
+            margin-bottom: 10px;
+            font-size: 21px;
+        }
+        
+        .dashboard-card p {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .card-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 9px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        .reports-section {
+            margin-top: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+        
+        .reports-section h2 {
+            margin-bottom: 20px;
+        }
+        
+        .report-link {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        @media (max-width: 600px) {
+            .welcome-box h1 {
+                font-size: 27px;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="nav-brand">
+                🔐 Smart Student Placement
+            </div>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('admin_dashboard') }}">
+                Dashboard
+            </a>
+
+                <a href="{{ url_for('admin_students') }}">
+                Students
+            </a>
+
+                <a href="{{ url_for('admin_companies') }}">
+                Companies
+            </a>
+
+                <a href="{{ url_for('admin_jobs') }}">
+                Jobs
+            </a>
+
+                <a href="{{ url_for('admin_applications') }}">
+                Applications
+            </a>
+
+                <a href="{{ url_for('placement_reports') }}">
+                Reports
+            </a>
+
+                <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= DASHBOARD ================= -->
+
+    <div class="dashboard-container">
+
+        <div class="welcome-box">
+
+            <h1>
+                👋 Welcome, Admin!
+            </h1>
+
+            <p>
+                Manage students, companies, jobs, applications and placement reports from one place.
+            </p>
+
+        </div>
+
+
+        <!-- Dashboard Cards -->
+
+        <div class="dashboard-grid">
+
+            <!-- Students -->
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    👨‍🎓
+                </div>
+
+                <h2>
+                    Students
+                </h2>
+
+                <p>
+                    View registered students and their details.
+                </p>
+
+                <a href="{{ url_for('admin_students') }}" class="card-btn">
+
+                View Students
+
+            </a>
+
+            </div>
+
+
+            <!-- Companies -->
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    🏢
+                </div>
+
+                <h2>
+                    Companies
+                </h2>
+
+                <p>
+                    View all registered companies.
+                </p>
+
+                <a href="{{ url_for('admin_companies') }}" class="card-btn">
+
+                View Companies
+
+            </a>
+
+            </div>
+
+
+            <!-- Jobs -->
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    💼
+                </div>
+
+                <h2>
+                    Jobs
+                </h2>
+
+                <p>
+                    View all jobs available in the system.
+                </p>
+
+                <a href="{{ url_for('admin_jobs') }}" class="card-btn">
+
+                View Jobs
+
+            </a>
+
+            </div>
+
+
+            <!-- Applications -->
+
+            <div class="dashboard-card">
+
+                <div class="card-icon">
+                    📋
+                </div>
+
+                <h2>
+                    Applications
+                </h2>
+
+                <p>
+                    Monitor student job applications.
+                </p>
+
+                <a href="{{ url_for('admin_applications') }}" class="card-btn">
+
+                View Applications
+
+            </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Reports -->
+
+        <div class="reports-section">
+
+            <h2>
+                📊 Placement Reports
+            </h2>
+
+            <p>
+                View application status and overall placement information.
+            </p>
+
+            <a href="{{ url_for('placement_reports') }}" class="report-link">
+
+            📈 View Placement Reports
+
+        </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Profile</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <h2>🎓 Smart Placement</h2>
+
+        <div>
+
+            <a href="{{ url_for('student_dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="/student/jobs">
+                Jobs
+            </a>
+
+            <a href="/student/applications">
+                Applications
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>👤 Student Profile</h1>
+
+            <p>
+                View your personal and academic information and manage your resume.
+            </p>
+
+            <hr>
+
+
+            <div class="dashboard-grid">
+
+                <div class="dashboard-card">
+
+                    <h3>👤 Personal Information</h3>
+
+                    <p>
+                        <strong>Name:</strong> {{ student[1] }}
+                    </p>
+
+                    <p>
+                        <strong>Email:</strong> {{ student[2] }}
+                    </p>
+
+                    <p>
+                        <strong>Mobile:</strong> {{ student[3] }}
+                    </p>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <h3>🎓 Academic Information</h3>
+
+                    <p>
+                        <strong>Course:</strong> {{ student[5] }}
+                    </p>
+
+                    <p>
+                        <strong>CGPA:</strong> {{ student[6] }}
+                    </p>
+
+                </div>
+
+
+                <div class="dashboard-card">
+
+                    <h3>💻 Skills</h3>
+
+                    <p>
+                        {{ student[7] }}
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <br>
+
+
+            <div class="card">
+
+                <h2>📄 Resume</h2>
+
+                <p>
+                    Upload your latest resume in PDF format.
+                </p>
+
+
+                <form method="POST" action="{{ url_for('upload_resume') }}" enctype="multipart/form-data">
+
+                    <label>Select Resume</label>
+
+                    <input type="file" name="resume" accept=".pdf" required>
+
+                    <br><br>
+
+                    <button type="submit">
+                        📤 Upload Resume
+                    </button>
+
+                </form>
+
+
+                {% if student[8] %}
+
+                <hr>
+
+                <div class="dashboard-card">
+
+                    <h3>✅ Resume Uploaded</h3>
+
+                    <p>
+                        Your resume is successfully uploaded.
+                    </p>
+
+                    <br>
+
+                    <a href="{{ url_for('static', filename='resumes/' + student[8]) }}" target="_blank">
+
+                        <button type="button">
+                                👁️ View Resume
+                            </button>
+
+                    </a>
+
+                </div>
+
+                {% else %}
+
+                <hr>
+
+                <p>
+                    ⚠️ No resume uploaded yet.
+                </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <br>
+
+            <a href="{{ url_for('student_dashboard') }}" class="back-link">
+
+                ← Back to Dashboard
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+        <p>
+            Manage Your Career. Find Your Opportunity.
+        </p>
+
+    </div>
+
+</body>
+
+</html>

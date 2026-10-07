@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Placement Status | Smart Student Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .status-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .status-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .status-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .status-header p {
+            color: #666;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .status-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        
+        .status-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .status-card h2 {
+            margin-bottom: 18px;
+        }
+        
+        .info {
+            margin: 10px 0;
+            color: #555;
+        }
+        
+        .info strong {
+            color: #222;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        
+        .applied {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .shortlisted {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .interview {
+            background: #e8eaf6;
+            color: #3949ab;
+        }
+        
+        .selected {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .empty-box {
+            background: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+        
+        .empty-box h2 {
+            margin-bottom: 12px;
+        }
+        
+        .empty-box p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .jobs-btn {
+            display: inline-block;
+            text-decoration: none;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .navbar {
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .status-header h1 {
+                font-size: 28px;
+            }
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="nav-brand">
+                🎓 Smart Student Placement
+            </div>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('student_dashboard') }}">
+                Dashboard
+            </a>
+
+                <a href="{{ url_for('student_profile') }}">
+                Profile
+            </a>
+
+                <a href="/student/jobs">
+                Jobs
+            </a>
+
+                <a href="/student/recommended-jobs">
+                Recommended
+            </a>
+
+                <a href="/student/applications">
+                Applications
+            </a>
+
+                <a href="/student/placement-status">
+                Placement Status
+            </a>
+
+                <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="status-container">
+
+        <div class="status-header">
+
+            <h1>📊 Placement Status</h1>
+
+            <p>
+                Track the current status of your job applications.
+            </p>
+
+        </div>
+
+
+        {% if placements %}
+
+        <div class="status-grid">
+
+            {% for placement in placements %}
+
+            <div class="status-card">
+
+                <h2>
+                    💼 {{ placement[0] }}
+                </h2>
+
+                <div class="info">
+                    <strong>🏢 Company:</strong> {{ placement[1] }}
+                </div>
+
+                <div class="info">
+                    <strong>📅 Applied On:</strong> {{ placement[2] }}
+                </div>
+
+                <div class="info">
+
+                    <strong>📌 Current Status:</strong> {% if placement[3] == "Applied" %}
+
+                    <span class="status-badge applied">
+                                Applied
+                            </span> {% elif placement[3] == "Shortlisted" %}
+
+                    <span class="status-badge shortlisted">
+                                Shortlisted
+                            </span> {% elif placement[3] == "Interview" %}
+
+                    <span class="status-badge interview">
+                                Interview
+                            </span> {% elif placement[3] == "Selected" %}
+
+                    <span class="status-badge selected">
+                                🎉 Selected
+                            </span> {% elif placement[3] == "Rejected" %}
+
+                    <span class="status-badge rejected">
+                                Rejected
+                            </span> {% else %}
+
+                    <span class="status-badge applied">
+                                {{ placement[3] }}
+                            </span> {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-box">
+
+            <h2>
+                📭 No Placement Status Available
+            </h2>
+
+            <p>
+                You have not applied for any jobs yet. Apply for jobs to track your placement status here.
+            </p>
+
+            <a href="/student/jobs" class="jobs-btn">
+                🔍 Explore Jobs
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Jobs | Smart Student Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .jobs-container {
+            max-width: 1150px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .jobs-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .jobs-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .jobs-header p {
+            color: #666;
+        }
+        
+        .jobs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .job-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        
+        .job-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .job-card h2 {
+            margin-bottom: 18px;
+        }
+        
+        .job-info {
+            margin: 10px 0;
+            color: #555;
+        }
+        
+        .job-info strong {
+            color: #222;
+        }
+        
+        .job-description {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .job-id {
+            display: inline-block;
+            background: #f0f2ff;
+            color: #667eea;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .empty-box {
+            background: white;
+            padding: 50px 20px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+        
+        .post-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        @media (max-width: 600px) {
+            .jobs-header h1 {
+                font-size: 28px;
+            }
+            .jobs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="nav-brand">
+                🏢 Smart Student Placement
+            </div>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('company_dashboard') }}">
+                Dashboard
+            </a>
+
+                <a href="{{ url_for('company_profile') }}">
+                Profile
+            </a>
+
+                <a href="{{ url_for('post_job') }}">
+                Post Job
+            </a>
+
+                <a href="{{ url_for('company_jobs') }}">
+                My Jobs
+            </a>
+
+                <a href="{{ url_for('company_applicants') }}">
+                Applicants
+            </a>
+
+                <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MY JOBS ================= -->
+
+    <div class="jobs-container">
+
+        <div class="jobs-header">
+
+            <h1>💼 My Jobs</h1>
+
+            <p>
+                View all jobs posted by your company.
+            </p>
+
+        </div>
+
+
+        {% if jobs %}
+
+        <div class="jobs-grid">
+
+            {% for job in jobs %}
+
+            <div class="job-card">
+
+                <span class="job-id">
+                        Job ID: {{ job[0] }}
+                    </span>
+
+                <h2>
+                    💼 {{ job[1] }}
+                </h2>
+
+                <div class="job-info">
+                    <strong>🏢 Company:</strong> {{ job[2] }}
+                </div>
+
+                <div class="job-info">
+                    <strong>📍 Location:</strong> {{ job[3] }}
+                </div>
+
+                <div class="job-info">
+                    <strong>🕒 Job Type:</strong> {{ job[4] }}
+                </div>
+
+                <div class="job-info">
+                    <strong>🎓 Required Course:</strong> {{ job[5] }}
+                </div>
+
+                <div class="job-info">
+                    <strong>📊 Minimum CGPA:</strong> {{ job[6] }}
+                </div>
+
+                <div class="job-info">
+                    <strong>🛠️ Required Skills:</strong> {{ job[7] }}
+                </div>
+
+                <div class="job-description">
+
+                    <strong>📝 Description:</strong>
+
+                    <p>
+                        {{ job[8] }}
+                    </p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-box">
+
+            <h2>📭 No Jobs Posted Yet</h2>
+
+            <p>
+                You have not posted any jobs yet.
+            </p>
+
+            <a href="{{ url_for('post_job') }}" class="post-btn">
+
+                ➕ Post Your First Job
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

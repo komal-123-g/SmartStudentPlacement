@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin - Applications</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+        /* NAVBAR */
+        
+        .navbar {
+            background: linear-gradient(135deg, #4b0082, #7b2cbf);
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd6ff;
+        }
+        
+        .logout {
+            background: white;
+            color: #6a1b9a !important;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        /* HEADER */
+        
+        .header {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+        
+        .header h1 {
+            color: #4b0082;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 15px;
+        }
+        /* CONTAINER */
+        
+        .container {
+            width: 94%;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+        /* TABLE */
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1000px;
+        }
+        
+        th {
+            background: #6a1b9a;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+        
+        td {
+            padding: 14px 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+        
+        tr:hover {
+            background: #faf5ff;
+        }
+        /* ID */
+        
+        .id {
+            font-weight: bold;
+            color: #6a1b9a;
+        }
+        /* STUDENT */
+        
+        .student-name {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .email {
+            color: #666;
+        }
+        /* JOB */
+        
+        .job-title {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .company {
+            color: #6a1b9a;
+            font-weight: 600;
+        }
+        /* DATE */
+        
+        .date {
+            color: #555;
+            white-space: nowrap;
+        }
+        /* STATUS */
+        
+        .status {
+            display: inline-block;
+            padding: 7px 13px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .applied {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        
+        .shortlisted {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .interview {
+            background: #e8eaf6;
+            color: #3949ab;
+        }
+        
+        .selected {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        /* EMPTY */
+        
+        .empty {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+        
+        .empty h2 {
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .empty p {
+            color: #888;
+        }
+        /* BUTTON */
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 11px 22px;
+            background: linear-gradient( 135deg, #4b0082, #7b2cbf);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(75, 0, 130, 0.25);
+        }
+        /* FOOTER */
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 40px;
+            background: #eee;
+            color: #666;
+            font-size: 13px;
+        }
+        /* RESPONSIVE */
+        
+        @media (max-width: 900px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 12px;
+            }
+            .header h1 {
+                font-size: 26px;
+            }
+            .container {
+                width: 96%;
+                padding: 15px;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            🎓 Smart Placement Admin
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('admin_dashboard') }}">
+            Dashboard
+        </a>
+
+            <a href="{{ url_for('admin_students') }}">
+            Students
+        </a>
+
+            <a href="{{ url_for('admin_companies') }}">
+            Companies
+        </a>
+
+            <a href="{{ url_for('admin_jobs') }}">
+            Jobs
+        </a>
+
+            <a href="{{ url_for('admin_applications') }}">
+            Applications
+        </a>
+
+            <a href="{{ url_for('placement_reports') }}">
+            Reports
+        </a>
+
+            <a href="{{ url_for('logout') }}" class="logout">
+            Logout
+        </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            📋 Student Applications
+        </h1>
+
+        <p>
+            View all job applications submitted by students.
+        </p>
+
+    </div>
+
+
+    <!-- APPLICATIONS -->
+
+    <div class="container">
+
+        {% if applications %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Application ID</th>
+
+                    <th>Student Name</th>
+
+                    <th>Email</th>
+
+                    <th>Job Title</th>
+
+                    <th>Company</th>
+
+                    <th>Applied Date</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for application in applications %}
+
+                <tr>
+
+                    <!-- APPLICATION ID -->
+
+                    <td class="id">
+                        #{{ application[0] }}
+                    </td>
+
+
+                    <!-- STUDENT -->
+
+                    <td class="student-name">
+                        {{ application[1] }}
+                    </td>
+
+
+                    <!-- EMAIL -->
+
+                    <td class="email">
+                        {{ application[2] }}
+                    </td>
+
+
+                    <!-- JOB -->
+
+                    <td class="job-title">
+                        {{ application[3] }}
+                    </td>
+
+
+                    <!-- COMPANY -->
+
+                    <td class="company">
+                        {{ application[4] }}
+                    </td>
+
+
+                    <!-- DATE -->
+
+                    <td class="date">
+                        {{ application[5] }}
+                    </td>
+
+
+                    <!-- STATUS -->
+
+                    <td>
+
+                        {% if application[6] == "Applied" %}
+
+                        <span class="status applied">
+                            Applied
+                        </span> {% elif application[6] == "Shortlisted" %}
+
+                        <span class="status shortlisted">
+                            Shortlisted
+                        </span> {% elif application[6] == "Interview" %}
+
+                        <span class="status interview">
+                            Interview
+                        </span> {% elif application[6] == "Selected" %}
+
+                        <span class="status selected">
+                            Selected
+                        </span> {% elif application[6] == "Rejected" %}
+
+                        <span class="status rejected">
+                            Rejected
+                        </span> {% else %}
+
+                        <span class="status applied">
+                            {{ application[6] }}
+                        </span> {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+
+        {% else %}
+
+
+        <!-- EMPTY STATE -->
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                📋
+            </div>
+
+            <h2>
+                No Applications Found
+            </h2>
+
+            <p>
+                No students have applied for any job yet.
+            </p>
+
+            <a href="{{ url_for('admin_dashboard') }}" class="back-btn">
+            ← Back to Dashboard
+        </a>
+
+        </div>
+
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Smart Student Placement Management System
+
+    </footer>
+
+
+</body>
+
+</html>

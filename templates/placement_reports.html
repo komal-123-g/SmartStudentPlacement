@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Placement Reports - Admin</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+        /* NAVBAR */
+        
+        .navbar {
+            background: linear-gradient( 135deg, #4b0082, #7b2cbf);
+            padding: 18px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ffd6ff;
+        }
+        
+        .logout {
+            background: white;
+            color: #6a1b9a !important;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+        /* HEADER */
+        
+        .header {
+            text-align: center;
+            padding: 45px 20px 30px;
+        }
+        
+        .header h1 {
+            color: #4b0082;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #666;
+            font-size: 15px;
+        }
+        /* MAIN CONTAINER */
+        
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: auto;
+        }
+        /* MAIN STAT CARDS */
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-icon {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .stat-number {
+            color: #6a1b9a;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        /* STATUS SECTION */
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+        
+        .section h2 {
+            color: #4b0082;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        /* STATUS GRID */
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+        
+        .status-card {
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            background: #faf5ff;
+        }
+        
+        .status-card .icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+        
+        .status-card h3 {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+        }
+        
+        .status-number {
+            font-size: 25px;
+            font-weight: bold;
+            color: #6a1b9a;
+        }
+        /* SUMMARY */
+        
+        .summary {
+            background: linear-gradient( 135deg, #4b0082, #7b2cbf);
+            color: white;
+            padding: 30px;
+            border-radius: 18px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .summary h2 {
+            margin-bottom: 12px;
+        }
+        
+        .summary p {
+            line-height: 1.7;
+            font-size: 15px;
+            opacity: 0.95;
+        }
+        /* BUTTON */
+        
+        .button-area {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: linear-gradient( 135deg, #4b0082, #7b2cbf);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(75, 0, 130, 0.25);
+        }
+        /* FOOTER */
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 20px;
+            background: #eee;
+            color: #666;
+            font-size: 13px;
+        }
+        /* RESPONSIVE */
+        
+        @media (max-width: 1000px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .status-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 700px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .nav-links {
+                justify-content: center;
+                gap: 12px;
+            }
+            .header h1 {
+                font-size: 26px;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .status-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .container {
+                width: 94%;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <div class="navbar">
+
+        <div class="logo">
+            🎓 Smart Placement Admin
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('admin_dashboard') }}">
+            Dashboard
+        </a>
+
+            <a href="{{ url_for('admin_students') }}">
+            Students
+        </a>
+
+            <a href="{{ url_for('admin_companies') }}">
+            Companies
+        </a>
+
+            <a href="{{ url_for('admin_jobs') }}">
+            Jobs
+        </a>
+
+            <a href="{{ url_for('admin_applications') }}">
+            Applications
+        </a>
+
+            <a href="{{ url_for('placement_reports') }}">
+            Reports
+        </a>
+
+            <a href="{{ url_for('logout') }}" class="logout">
+            Logout
+        </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <h1>
+            📊 Placement Reports
+        </h1>
+
+        <p>
+            Overview of students, companies, jobs and placement applications.
+        </p>
+
+    </div>
+
+
+    <div class="container">
+
+
+        <!-- MAIN STATISTICS -->
+
+        <div class="stats-grid">
+
+
+            <!-- STUDENTS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    👨‍🎓
+                </div>
+
+                <h3>
+                    Total Students
+                </h3>
+
+                <div class="stat-number">
+                    {{ total_students }}
+                </div>
+
+            </div>
+
+
+            <!-- COMPANIES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🏢
+                </div>
+
+                <h3>
+                    Total Companies
+                </h3>
+
+                <div class="stat-number">
+                    {{ total_companies }}
+                </div>
+
+            </div>
+
+
+            <!-- JOBS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    💼
+                </div>
+
+                <h3>
+                    Total Jobs
+                </h3>
+
+                <div class="stat-number">
+                    {{ total_jobs }}
+                </div>
+
+            </div>
+
+
+            <!-- APPLICATIONS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📋
+                </div>
+
+                <h3>
+                    Total Applications
+                </h3>
+
+                <div class="stat-number">
+                    {{ total_applications }}
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- APPLICATION STATUS -->
+
+        <div class="section">
+
+            <h2>
+                📌 Application Status Overview
+            </h2>
+
+
+            <div class="status-grid">
+
+
+                <!-- APPLIED -->
+
+                <div class="status-card">
+
+                    <div class="icon">
+                        📝
+                    </div>
+
+                    <h3>
+                        Applied
+                    </h3>
+
+                    <div class="status-number">
+                        {{ total_applied }}
+                    </div>
+
+                </div>
+
+
+                <!-- SHORTLISTED -->
+
+                <div class="status-card">
+
+                    <div class="icon">
+                        ⭐
+                    </div>
+
+                    <h3>
+                        Shortlisted
+                    </h3>
+
+                    <div class="status-number">
+                        {{ total_shortlisted }}
+                    </div>
+
+                </div>
+
+
+                <!-- INTERVIEW -->
+
+                <div class="status-card">
+
+                    <div class="icon">
+                        🎤
+                    </div>
+
+                    <h3>
+                        Interview
+                    </h3>
+
+                    <div class="status-number">
+                        {{ total_interview }}
+                    </div>
+
+                </div>
+
+
+                <!-- SELECTED -->
+
+                <div class="status-card">
+
+                    <div class="icon">
+                        🎉
+                    </div>
+
+                    <h3>
+                        Selected
+                    </h3>
+
+                    <div class="status-number">
+                        {{ total_selected }}
+                    </div>
+
+                </div>
+
+
+                <!-- REJECTED -->
+
+                <div class="status-card">
+
+                    <div class="icon">
+                        ❌
+                    </div>
+
+                    <h3>
+                        Rejected
+                    </h3>
+
+                    <div class="status-number">
+                        {{ total_rejected }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- SUMMARY -->
+
+        <div class="summary">
+
+            <h2>
+                🎓 Placement Management Summary
+            </h2>
+
+            <p>
+                This report provides an overall view of the placement activities in the system. It includes registered students, registered companies, available jobs and submitted applications along with their current status.
+            </p>
+
+        </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <div class="button-area">
+
+            <a href="{{ url_for('admin_dashboard') }}" class="back-btn">
+            ← Back to Admin Dashboard
+        </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        © 2026 Smart Student Placement Management System
+
+    </footer>
+
+
+</body>
+
+</html>

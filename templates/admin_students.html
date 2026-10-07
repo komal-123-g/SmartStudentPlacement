@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Students | Admin</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .students-container {
+            max-width: 1250px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .page-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .page-header p {
+            color: #666;
+        }
+        
+        .table-box {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 950px;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #eee;
+            color: #555;
+        }
+        
+        tr:hover td {
+            background: #f8f9ff;
+        }
+        
+        .student-id {
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .cgpa {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .empty-box {
+            background: white;
+            padding: 50px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 11px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+        
+        @media (max-width: 700px) {
+            .page-header h1 {
+                font-size: 28px;
+            }
+            .table-box {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="nav-brand">
+                🔐 Smart Student Placement
+            </div>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('admin_dashboard') }}">
+                Dashboard
+            </a>
+
+                <a href="{{ url_for('admin_students') }}">
+                Students
+            </a>
+
+                <a href="{{ url_for('admin_companies') }}">
+                Companies
+            </a>
+
+                <a href="{{ url_for('admin_jobs') }}">
+                Jobs
+            </a>
+
+                <a href="{{ url_for('admin_applications') }}">
+                Applications
+            </a>
+
+                <a href="{{ url_for('placement_reports') }}">
+                Reports
+            </a>
+
+                <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= STUDENTS ================= -->
+
+    <div class="students-container">
+
+        <div class="page-header">
+
+            <h1>👨‍🎓 Registered Students</h1>
+
+            <p>
+                View all students registered in the placement system.
+            </p>
+
+        </div>
+
+
+        {% if students %}
+
+        <div class="table-box">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+
+                        <th>Name</th>
+
+                        <th>Email</th>
+
+                        <th>Mobile</th>
+
+                        <th>Course</th>
+
+                        <th>CGPA</th>
+
+                        <th>Skills</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                    {% for student in students %}
+
+                    <tr>
+
+                        <td class="student-id">
+                            {{ student[0] }}
+                        </td>
+
+                        <td>
+                            {{ student[1] }}
+                        </td>
+
+                        <td>
+                            {{ student[2] }}
+                        </td>
+
+                        <td>
+                            {{ student[3] }}
+                        </td>
+
+                        <td>
+                            {{ student[5] }}
+                        </td>
+
+                        <td class="cgpa">
+                            {{ student[6] }}
+                        </td>
+
+                        <td>
+                            {{ student[7] }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-box">
+
+            <h2>
+                📭 No Students Found
+            </h2>
+
+            <p>
+                No students have registered in the system yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <div style="text-align:center;">
+
+            <a href="{{ url_for('admin_dashboard') }}" class="back-btn">
+
+            ← Back to Dashboard
+
+        </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

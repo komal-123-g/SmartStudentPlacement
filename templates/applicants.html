@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Applicants | Smart Student Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .applicants-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+        
+        .applicants-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .applicants-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .applicants-header p {
+            color: #666;
+        }
+        
+        .applicant-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        
+        .applicant-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+            border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        
+        .applicant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .student-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .applicant-card h2 {
+            margin-bottom: 18px;
+        }
+        
+        .info {
+            margin: 10px 0;
+            color: #555;
+        }
+        
+        .info strong {
+            color: #222;
+        }
+        
+        .status-form {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .status-form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .status-form select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .update-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 9px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .update-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .empty-box {
+            background: white;
+            padding: 55px 20px;
+            text-align: center;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.10);
+        }
+        
+        .empty-box h2 {
+            margin-bottom: 12px;
+        }
+        
+        .empty-box p {
+            color: #666;
+        }
+        
+        @media (max-width: 600px) {
+            .applicants-header h1 {
+                font-size: 28px;
+            }
+            .applicant-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="nav-brand">
+                🏢 Smart Student Placement
+            </div>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('company_dashboard') }}">
+                Dashboard
+            </a>
+
+                <a href="{{ url_for('company_profile') }}">
+                Profile
+            </a>
+
+                <a href="{{ url_for('post_job') }}">
+                Post Job
+            </a>
+
+                <a href="{{ url_for('company_jobs') }}">
+                My Jobs
+            </a>
+
+                <a href="{{ url_for('company_applicants') }}">
+                Applicants
+            </a>
+
+                <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= APPLICANTS ================= -->
+
+    <div class="applicants-container">
+
+        <div class="applicants-header">
+
+            <h1>👥 Job Applicants</h1>
+
+            <p>
+                View students who have applied for your jobs and update their application status.
+            </p>
+
+        </div>
+
+
+        {% if applicants %}
+
+        <div class="applicant-grid">
+
+            {% for applicant in applicants %}
+
+            <div class="applicant-card">
+
+                <div class="student-icon">
+                    👨‍🎓
+                </div>
+
+                <h2>
+                    {{ applicant[0] }}
+                </h2>
+
+                <div class="info">
+                    <strong>📧 Email:</strong> {{ applicant[1] }}
+                </div>
+
+                <div class="info">
+                    <strong>📱 Mobile:</strong> {{ applicant[2] }}
+                </div>
+
+                <div class="info">
+                    <strong>💼 Applied For:</strong> {{ applicant[3] }}
+                </div>
+
+                <div class="info">
+                    <strong>📅 Applied On:</strong> {{ applicant[4] }}
+                </div>
+
+                <div class="info">
+                    <strong>📌 Current Status:</strong> {{ applicant[5] }}
+                </div>
+
+
+                <!-- UPDATE STATUS -->
+
+                <div class="status-form">
+
+                    <form method="POST" action="/company/update-status/{{ applicant[6] }}">
+
+                        <label>
+                                Update Application Status
+                            </label>
+
+                        <select name="status" required>
+
+                                <option value="Applied"
+                                    {% if applicant[5] == "Applied" %}selected{% endif %}>
+                                    Applied
+                                </option>
+
+                                <option value="Shortlisted"
+                                    {% if applicant[5] == "Shortlisted" %}selected{% endif %}>
+                                    Shortlisted
+                                </option>
+
+                                <option value="Interview"
+                                    {% if applicant[5] == "Interview" %}selected{% endif %}>
+                                    Interview
+                                </option>
+
+                                <option value="Selected"
+                                    {% if applicant[5] == "Selected" %}selected{% endif %}>
+                                    Selected
+                                </option>
+
+                                <option value="Rejected"
+                                    {% if applicant[5] == "Rejected" %}selected{% endif %}>
+                                    Rejected
+                                </option>
+
+                            </select>
+
+                        <button type="submit" class="update-btn">
+
+                                🔄 Update Status
+
+                            </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-box">
+
+            <h2>
+                📭 No Applicants Yet
+            </h2>
+
+            <p>
+                No students have applied for your jobs yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

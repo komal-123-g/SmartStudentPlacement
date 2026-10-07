@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Available Jobs</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+
+    <!-- Navbar -->
+
+    <div class="navbar">
+
+        <h2>🎓 Smart Placement</h2>
+
+        <div>
+
+            <a href="{{ url_for('student_dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="/student/profile">
+                Profile
+            </a>
+
+            <a href="/student/applications">
+                Applications
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Main Content -->
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>💼 Available Jobs</h1>
+
+            <p>
+                Explore the latest job opportunities and find the right career opportunity for you.
+            </p>
+
+        </div>
+
+
+        <!-- Job List -->
+
+        {% if jobs %}
+
+        <div class="job-grid">
+
+            {% for job in jobs %}
+
+            <div class="job-card float">
+
+                <h3>
+                    💼 {{ job[1] }}
+                </h3>
+
+
+                <p class="company">
+                    🏢 {{ job[2] }}
+                </p>
+
+
+                <p>
+                    📍 <strong>Location:</strong> {{ job[3] }}
+                </p>
+
+
+                <p>
+                    💼 <strong>Job Type:</strong> {{ job[4] }}
+                </p>
+
+
+                <p>
+                    🎓 <strong>Course:</strong> {{ job[5] }}
+                </p>
+
+
+                <p>
+                    📊 <strong>Minimum CGPA:</strong> {{ job[6] }}
+                </p>
+
+
+                <p>
+                    🛠️ <strong>Skills:</strong> {{ job[7] }}
+                </p>
+
+
+                <br>
+
+
+                <a href="/student/job/{{ job[0] }}">
+
+                    <button type="button">
+                        👁️ View Details
+                    </button>
+
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+
+        {% else %}
+
+        <!-- No Jobs -->
+
+        <div class="card">
+
+            <h2>😔 No Jobs Available</h2>
+
+            <p>
+                Currently there are no job opportunities available. Please check again later.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+        <br>
+
+
+        <a href="{{ url_for('student_dashboard') }}" class="back-link">
+
+            ← Back to Dashboard
+
+        </a>
+
+    </div>
+
+
+    <!-- Footer -->
+
+    <div class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+        <p>
+            Manage Your Career. Find Your Opportunity.
+        </p>
+
+    </div>
+
+
+</body>
+
+</html>

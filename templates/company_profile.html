@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Company Profile | Smart Student Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+        .profile-container {
+            max-width: 950px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+        
+        .profile-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .profile-header p {
+            color: #666;
+        }
+        
+        .profile-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.10);
+        }
+        
+        .company-icon {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 42px;
+        }
+        
+        .company-name {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .info-box {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+        
+        .info-box.full {
+            grid-column: span 2;
+        }
+        
+        .info-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .info-box span {
+            color: #666;
+        }
+        
+        .action-buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .dashboard-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+        
+        @media (max-width: 700px) {
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+            .info-box.full {
+                grid-column: span 1;
+            }
+            .profile-header h1 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="container">
+
+            <div class="nav-brand">
+                🏢 Smart Student Placement
+            </div>
+
+            <div class="nav-links">
+
+                <a href="{{ url_for('company_dashboard') }}">
+                Dashboard
+            </a>
+
+                <a href="{{ url_for('company_profile') }}">
+                Profile
+            </a>
+
+                <a href="{{ url_for('post_job') }}">
+                Post Job
+            </a>
+
+                <a href="{{ url_for('company_jobs') }}">
+                My Jobs
+            </a>
+
+                <a href="{{ url_for('company_applicants') }}">
+                Applicants
+            </a>
+
+                <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ================= PROFILE ================= -->
+
+    <div class="profile-container">
+
+        <div class="profile-header">
+
+            <h1>🏢 Company Profile</h1>
+
+            <p>
+                View your registered company information.
+            </p>
+
+        </div>
+
+
+        <div class="profile-card">
+
+            <div class="company-icon">
+                🏢
+            </div>
+
+            <div class="company-name">
+                {{ company[1] }}
+            </div>
+
+
+            <div class="profile-grid">
+
+                <div class="info-box">
+
+                    <strong>📧 Email</strong>
+
+                    <span>
+                    {{ company[2] }}
+                </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>📱 Mobile</strong>
+
+                    <span>
+                    {{ company[3] }}
+                </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>📍 Location</strong>
+
+                    <span>
+                    {{ company[5] }}
+                </span>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <strong>🆔 Company ID</strong>
+
+                    <span>
+                    {{ company[0] }}
+                </span>
+
+                </div>
+
+
+                <div class="info-box full">
+
+                    <strong>📝 Company Description</strong>
+
+                    <span>
+                    {{ company[6] }}
+                </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="action-buttons">
+
+                <a href="{{ url_for('company_dashboard') }}" class="dashboard-btn">
+
+                ← Back to Dashboard
+
+            </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

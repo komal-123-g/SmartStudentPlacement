@@ -1,0 +1,662 @@
+/* =========================================================
+   SMART STUDENT PLACEMENT MANAGEMENT SYSTEM
+   MODERN UI + ANIMATIONS
+   ========================================================= */
+
+
+/* =========================
+   RESET
+   ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   BODY
+   ========================= */
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient( 135deg, #f5f3ff, #eef2ff, #f8fafc);
+    color: #1e293b;
+    min-height: 100vh;
+    animation: pageFade 0.7s ease;
+}
+
+
+/* =========================
+   PAGE FADE ANIMATION
+   ========================= */
+
+@keyframes pageFade {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   MAIN CONTAINER
+   ========================= */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+
+/* =========================
+   HEADINGS
+   ========================= */
+
+h1 {
+    font-size: 34px;
+    font-weight: 800;
+    color: #4c1d95;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 27px;
+    color: #5b21b6;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #6d28d9;
+    margin-bottom: 12px;
+}
+
+p {
+    line-height: 1.7;
+    color: #475569;
+}
+
+
+/* =========================
+   HR
+   ========================= */
+
+hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient( 90deg, transparent, #8b5cf6, transparent);
+    margin: 20px 0;
+}
+
+
+/* =========================
+   LINKS
+   ========================= */
+
+a {
+    text-decoration: none;
+    color: #6d28d9;
+    transition: 0.3s ease;
+}
+
+a:hover {
+    color: #4c1d95;
+}
+
+
+/* =========================
+   BUTTON
+   ========================= */
+
+button {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    background: linear-gradient( 135deg, #7c3aed, #4f46e5);
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+button:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 14px 28px rgba(79, 70, 229, 0.35);
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+
+/* =========================
+   INPUT / SELECT / TEXTAREA
+   ========================= */
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd6fe;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 15px;
+    outline: none;
+    transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.12);
+    transform: translateY(-1px);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+form {
+    margin-top: 15px;
+}
+
+form label {
+    display: block;
+    margin-bottom: 7px;
+    margin-top: 15px;
+    font-weight: 600;
+    color: #334155;
+}
+
+
+/* =========================
+   CARD
+   ========================= */
+
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(139, 92, 246, 0.15);
+    border-radius: 18px;
+    padding: 25px;
+    box-shadow: 0 10px 35px rgba(30, 41, 59, 0.08);
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 45px rgba(76, 29, 149, 0.15);
+}
+
+
+/* =========================
+   DASHBOARD GRID
+   ========================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+    margin-top: 30px;
+}
+
+
+/* =========================
+   DASHBOARD CARD
+   ========================= */
+
+.dashboard-card {
+    background: white;
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid #ede9fe;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    transition: 0.3s ease;
+    animation: cardAppear 0.7s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 40px rgba(79, 70, 229, 0.16);
+}
+
+.dashboard-card h3 {
+    font-size: 21px;
+}
+
+.dashboard-card p {
+    margin: 8px 0 18px;
+}
+
+
+/* =========================
+   CARD APPEAR
+   ========================= */
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   HERO SECTION
+   ========================= */
+
+.hero {
+    min-height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 20px;
+    background: radial-gradient( circle at top left, rgba(139, 92, 246, 0.18), transparent 35%), radial-gradient( circle at bottom right, rgba(59, 130, 246, 0.18), transparent 35%);
+}
+
+.hero h1 {
+    font-size: 48px;
+    background: linear-gradient( 135deg, #6d28d9, #2563eb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: heroText 1s ease;
+}
+
+.hero p {
+    font-size: 19px;
+    margin-bottom: 30px;
+}
+
+
+/* =========================
+   HERO ANIMATION
+   ========================= */
+
+@keyframes heroText {
+    from {
+        opacity: 0;
+        transform: translateY(-25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   LOGIN / REGISTER BOX
+   ========================= */
+
+.auth-container {
+    min-height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 450px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 35px;
+    border-radius: 22px;
+    border: 1px solid #ede9fe;
+    box-shadow: 0 20px 50px rgba(76, 29, 149, 0.12);
+    backdrop-filter: blur(15px);
+    animation: authAppear 0.7s ease;
+}
+
+.auth-card h1,
+.auth-card h2 {
+    text-align: center;
+}
+
+
+/* =========================
+   AUTH ANIMATION
+   ========================= */
+
+@keyframes authAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar {
+    width: 100%;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient( 135deg, #4c1d95, #4338ca);
+    color: white;
+    box-shadow: 0 8px 25px rgba(67, 56, 202, 0.25);
+}
+
+.navbar h2 {
+    color: white;
+    margin: 0;
+}
+
+.navbar a {
+    color: white;
+    margin-left: 18px;
+    font-weight: 600;
+}
+
+.navbar a:hover {
+    opacity: 0.75;
+}
+
+
+/* =========================
+   JOB CARDS
+   ========================= */
+
+.job-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 30px;
+}
+
+.job-card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    border: 1px solid #e9d5ff;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    transition: 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-8px);
+    border-color: #8b5cf6;
+    box-shadow: 0 18px 40px rgba(124, 58, 237, 0.16);
+}
+
+.job-card h3 {
+    color: #5b21b6;
+    font-size: 21px;
+}
+
+.job-card .company {
+    color: #2563eb;
+    font-weight: 600;
+    margin: 8px 0;
+}
+
+
+/* =========================
+   STATUS BADGES
+   ========================= */
+
+.status {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-top: 8px;
+}
+
+.status-applied {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+.status-shortlisted {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.status-interview {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.status-selected {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-rejected {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+
+/* =========================
+   TABLE
+   ========================= */
+
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+    margin-top: 20px;
+}
+
+th {
+    background: linear-gradient( 135deg, #6d28d9, #4f46e5);
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #475569;
+}
+
+tr {
+    transition: 0.25s ease;
+}
+
+tbody tr:hover,
+table tr:hover {
+    background: #faf5ff;
+}
+
+
+/* =========================
+   STATISTICS
+   ========================= */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    border: 1px solid #ede9fe;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    transition: 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(79, 70, 229, 0.15);
+}
+
+.stat-card h2 {
+    font-size: 38px;
+    color: #6d28d9;
+    margin: 10px 0;
+}
+
+
+/* =========================
+   ALERT
+   ========================= */
+
+.alert {
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin: 15px 0;
+    background: #ede9fe;
+    color: #5b21b6;
+    border-left: 5px solid #7c3aed;
+}
+
+
+/* =========================
+   BACK LINK
+   ========================= */
+
+.back-link {
+    display: inline-block;
+    margin-top: 25px;
+    font-weight: 600;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.footer {
+    margin-top: 60px;
+    padding: 25px;
+    text-align: center;
+    background: #1e1b4b;
+    color: white;
+}
+
+.footer p {
+    color: #ddd6fe;
+}
+
+
+/* =========================
+   FLOATING ANIMATION
+   ========================= */
+
+.float {
+    animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================
+   GLOW EFFECT
+   ========================= */
+
+.glow {
+    animation: glowEffect 2s infinite alternate;
+}
+
+@keyframes glowEffect {
+    from {
+        box-shadow: 0 0 5px rgba(124, 58, 237, 0.2);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(124, 58, 237, 0.4);
+    }
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 28px;
+    }
+    .hero h1 {
+        font-size: 34px;
+    }
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    .navbar a {
+        margin: 5px;
+        display: inline-block;
+    }
+    table {
+        display: block;
+        overflow-x: auto;
+    }
+    .container {
+        width: 94%;
+    }
+}
+
+
+/* =========================
+   SMALL SCREEN
+   ========================= */
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 25px 18px;
+    }
+    .hero {
+        padding: 30px 15px;
+    }
+    .hero h1 {
+        font-size: 29px;
+    }
+    button {
+        width: 100%;
+    }
+}

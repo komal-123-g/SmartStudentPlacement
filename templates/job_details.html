@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Details - Smart Student Placement</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+        <div class="navbar-brand">
+            🎓 Smart Student Placement
+        </div>
+
+        <div class="navbar-links">
+
+            <a href="{{ url_for('student_dashboard') }}">
+                Dashboard
+            </a>
+
+            <a href="/student/jobs">
+                Jobs
+            </a>
+
+            <a href="/student/applications">
+                Applications
+            </a>
+
+            <a href="{{ url_for('logout') }}">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- MAIN CONTENT -->
+    <div class="container">
+
+        <div class="card">
+
+            <h1>💼 {{ job[1] }}</h1>
+
+            <p>
+                <strong>🏢 Company:</strong> {{ job[2] }}
+            </p>
+
+            <p>
+                <strong>📍 Location:</strong> {{ job[3] }}
+            </p>
+
+            <p>
+                <strong>💼 Job Type:</strong> {{ job[4] }}
+            </p>
+
+            <p>
+                <strong>🎓 Required Course:</strong> {{ job[5] }}
+            </p>
+
+            <p>
+                <strong>📊 Minimum CGPA:</strong> {{ job[6] }}
+            </p>
+
+            <p>
+                <strong>🛠️ Required Skills:</strong> {{ job[7] }}
+            </p>
+
+            <hr>
+
+            <h2>📝 Job Description</h2>
+
+            <p>
+                {{ job[8] }}
+            </p>
+
+
+            <!-- APPLY BUTTON -->
+
+            <div style="margin-top: 30px;">
+
+                <form method="POST" action="{{ url_for('apply_job', job_id=job[0]) }}">
+
+                    <button type="submit">
+                        🚀 Apply Now
+                    </button>
+
+                </form>
+
+            </div>
+
+
+            <!-- BACK BUTTON -->
+
+            <div style="margin-top: 15px;">
+
+                <a href="/student/jobs">
+                    <button type="button">
+                        ← Back to Jobs
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            © 2026 Smart Student Placement Management System
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
